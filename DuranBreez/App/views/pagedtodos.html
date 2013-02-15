@@ -1,0 +1,79 @@
+﻿<div class="btn-toolbar">
+    <a href="#" class="btn" data-bind="click: insert, visible: editable ">
+        <i class="icon-file"></i>
+        <span><strong>Novo</strong></span>
+    </a>
+    <a href="#" class="btn" data-bind="click: save, visible: editable, css: { disabled: noChanges}">
+        <i class="icon-save"></i>
+        <span><strong>Salvar</strong></span>
+    </a>
+    <a href="#" class="btn" data-bind="click: get">
+        <i class="icon-refresh"></i>
+        <span><strong>Atualizar</strong></span>
+    </a>
+    <a href="#" class="btn" data-bind="click: cancel, visible: editable, css: { disabled: noChanges}">
+        <i class="icon-undo"></i>
+        <span><strong>Cancelar</strong></span>
+    </a>
+    <button class="loader" data-bind="css: { active: isBusy }">
+        <i class="icon-spinner icon-2x icon-spin"></i>
+    </button>
+</div>
+<div class="row-fluid">
+    <div>
+        <table class="table table-bordered table-condensed table-hover">
+            <caption data-bind="text: displayName"></caption>
+            <thead>
+                <tr>
+                    <th class="span1">#</th>
+                    <th class="span1">
+                        <input type="checkbox"></th>
+                    <th>Description</th>
+                    <th class="span2">Is Done ?</th>
+                    <th class="span2">Options</th>
+                </tr>
+            </thead>
+            <!-- ko if: entities().length > 0 -->
+            <tbody data-bind="foreach: entities">
+                <tr>
+                    <td class="small" data-bind="text: Id" />
+                    <td>
+                        <input type="checkbox" />
+                    <td class="small" data-bind="text: Description" />
+                    <td>
+                        <span class="label" data-bind="css: { 'label-success': IsDone, 'label-important': !IsDone() },  text: IsDone() ? 'Yes' : 'No'">Sim</span>
+                    </td>
+                    <td>
+                        <div class="btn-group">
+                            <a class="btn btn-mini" href="#" data-bind="click: $parent.edit" data-toggle="tooltip" title="Edit this row in a Modal Window">
+                                <i class="icon-pencil"></i>
+                            </a>
+                            <a class="btn btn-mini" href="#" data-bind="attr: { href: '/#/todoDetail/' +Id()}" data-toggle="tooltip" title="Edit this row in another screen">
+                                <i class="icon-pencil"></i>
+                            </a>
+                            <a class="btn btn-mini" href="#" data-bind="click: $parent.remove" data-toggle="tooltip" title="Ask if you want to remove this row">
+                                <i class="icon-trash"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <!-- /ko -->
+            <!-- ko if: entities().length == 0 -->
+            <tbody>
+                <tr>
+                    <td colspan="6"><span class="strong">Nenhum registro encontrado para esta consulta !</span></td>
+                </tr>
+            </tbody>
+            <!-- /ko -->
+        </table>
+    </div>
+
+    <div class="pagination" data-bind="foreach: pageLinks">
+        <ul>
+            <li data-bind="css: { active: isCurrent}">
+                <a href="#" data-bind="click: $parent.gotoPage, text: pageNumber"></a>
+            </li>
+        </ul>
+    </div>
+</div>
