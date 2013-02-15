@@ -184,6 +184,10 @@
     <Content Include="App\views\pagedtodos.html" />
     <Content Include="App\views\shell.html" />
     <Content Include="App\views\welcome.html" />
+    <Content Include="App_Data\DuranBreez.Models.BreezeSampleContext.mdf" />
+    <Content Include="App_Data\DuranBreez.Models.BreezeSampleContext_log.ldf">
+      <DependentUpon>DuranBreez.Models.BreezeSampleContext.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\app.css" />
     <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap-responsive.min.css" />
@@ -233,9 +237,7 @@
     <Content Include="Views\Durandal\Index.cshtml" />
     <Content Include="Views\Durandal\_splash.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
