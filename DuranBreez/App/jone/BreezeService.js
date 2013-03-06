@@ -1,6 +1,5 @@
-﻿define(function (require) {
+define(function (require) {
     var system = require('durandal/system');
-    var toastr = require('toastr');
 
     var toast = toastr || system; //fallback to system.log in case toastr not global var
     if (toast == system) {
@@ -56,15 +55,20 @@
         function metaError(error) {
             toast.error("Metadata failed!" + error.message);
         }
+
+        function loadFromServer() {
+            toast.info('Loading metadata from server...');
+            BreezeService.Store.fetchMetadata(api).then(metaSuccess).fail(metaError);
+        }
         if (useLocalCacheIfAvailable) {
             var metadataFromStorage = window.localStorage.getItem("metadata");
             if (metadataFromStorage) {
                 BreezeService.Store.importMetadata(metadataFromStorage);
                 metaSuccess(null);
             }
+            else loadFromServer();
         } else {
-            toast.info('Loading metadata from server...');
-            BreezeService.Store.fetchMetadata(api).then(metaSuccess).fail(metaError);
+            loadFromServer();
         }
 
     };
